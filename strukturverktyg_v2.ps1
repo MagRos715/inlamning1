@@ -1,7 +1,7 @@
 # FUNKTION 1
 
 # Funktion för att skapa mappstrukturen om den inte redan existerar
-function Create-FolderIfNotExists { # Definierar funktionen och skapar ett anropsnamn
+function Create_Folder_If_Not_Exists { # Definierar funktionen och skapar ett anropsnamn
     param ( # Deklarerar en parameter till funktionen
         [string]$Path # [string] definierar datatypen för parametern
     )
@@ -21,7 +21,7 @@ function Create-FolderIfNotExists { # Definierar funktionen och skapar ett anrop
 # FUNKTION 2
 
 # Funktion för att skapa logfil
-function Create-LogFile {
+function Create_Log_File {
     param (
         [string]$FolderPath # [string] definierar datatypen för parametern
     )
@@ -43,15 +43,15 @@ function Create-LogFile {
 $name = Read-Host "What's your folder's name?" # Ber användaren att döpa sin mapp
 $basePath = Join-Path -Path (Get-Location) -ChildPath $name # Skapar en full sökväg till huvudmappen
 
-Create-FolderIfNotExists -Path $basePath # Anropar funktionen Create-FolderIfNotExists
+Create_Folder_If_Not_Exists -Path $basePath # Anropar funktionen Create-FolderIfNotExists
 
 # Loop för att skapa mapparna om de inte redan finns
 $subFolders = @("logs", "scripts", "temp") # Skapar en array med de mappar som ska skapas
 foreach ($sub in $subFolders) {
     $fullSubPath = Join-Path -Path $basePath -ChildPath $sub # Skapar full sökväg till mappen som skapas
-    Create-FolderIfNotExists -Path $fullSubPath # Skickar sökvägen till funktionen om den inte redan existerar
+    Create_Folder_If_Not_Exists -Path $fullSubPath # Skickar sökvägen till funktionen om den inte redan existerar
 }
 
 # Skapa loggfil i logs-mappen
 $logsPath = Join-Path -Path $basePath -ChildPath "logs" # Skapar sökvägen till logs
-Create-LogFile -FolderPath $logsPath # Anropar funktionen Create-logFile
+Create_Log_File -FolderPath $logsPath # Anropar funktionen Create-logFile
